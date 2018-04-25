@@ -1,171 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="renderer" content="webkit">
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>input dome</title>
-	<script src="http://apps.bdimg.com/libs/jquery/1.8.1/jquery.min.js"></script>
-	<style>
-		.check-price{font:12px/26px 'microsoft yahei';height:26px;padding:12px 15px;background:#eee;width:500px;margin:100px auto;}
-		.check-price .unit-price,
-		.check-price .check-number,
-		.check-price .check-total,
-		.check-price .minus,
-		.check-price .plus{display:inline-block;font-style:normal;}
-		.check-price .currency,
-		.check-price .price,
-		.check-price .total{color:#ff6600;font-style:normal;}
-		.check-price .check-number{position:relative;margin:0 15px;}
-		.check-price .minus,
-		.check-price .plus{position:absolute;top:0;*top:1px;width:20px;height:24px;background: #f5f5f5;border:1px solid #e1e1e1;vertical-align: top;text-align: center;font:20px/24px 'simsun';cursor:pointer;}
-		.check-price .minus:hover,
-		.check-price .plus:hover{color:#ff6600;border-color:#ff6600;}
-		.check-price .disabled{cursor:not-allowed;color:#c8c8c8 !important;border-color:#e1e1e1 !important;}
-		.check-price .minus{left:0;}
-		.check-price .plus{right:0;}
-		.check-price .number{border:1px solid #e1e1e1;height:24px;line-height:24px;padding:0 28px;outline:none;width:75px;}
-		.check-price .tips{display:none;position: absolute;left:21px;right:21px;top:31px;padding:5px;line-height:15px;border:1px solid #ff6600;background: #fff;font-size:12px;z-index:2; color:#ff6600;}
-		.check-price .tips:before{content:"";position:absolute;left:50%;margin-left:-6px;top:-12px;border:6px solid #ff6b11;border-color:transparent transparent #ff6b11 transparent;}
-		.check-price .tips:after{content:"";position:absolute;left:50%;margin-left:-6px;top:-11px;border:6px solid #fff;border-color:transparent transparent #fff transparent;}
-		input::-ms-clear,
-		input::-ms-reveal{display:none;}
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>input dome</title>
+    <script src="http://apps.bdimg.com/libs/jquery/1.8.1/jquery.min.js"></script>
+    <style>
+        .check-price{font:12px/26px 'microsoft yahei';height:26px;padding:12px 15px;background:#eee;width:500px;margin:100px auto;}
+        .check-price .unit-price,
+        .check-price .check-number,
+        .check-price .check-total,
+        .check-price .minus,
+        .check-price .plus{display:inline-block;font-style:normal;vertical-align:top;}
+        .check-price .currency,
+        .check-price .price,
+        .check-price .total{color:#ff6600;font-style:normal;}
+        .check-price .check-number{position:relative;margin:0 15px;}
+        .check-price .minus,
+        .check-price .plus{position:absolute;top:0;*top:1px;width:20px;height:24px;background: #f5f5f5;border:1px solid #e1e1e1;vertical-align: top;text-align: center;font:20px/24px 'simsun';cursor:pointer;}
+        .check-price .minus:hover,
+        .check-price .plus:hover{color:#ff6600;border-color:#ff6600;}
+        .check-price .disabled{cursor:not-allowed;color:#c8c8c8 !important;border-color:#e1e1e1 !important;}
+        .check-price .minus{left:0;}
+        .check-price .plus{right:0;}
+        .check-price .number{border:1px solid #e1e1e1;height:24px;line-height:24px;padding:0 28px;outline:none;width:75px;}
+        .check-price .tips{display:none;position: absolute;left:21px;right:21px;top:31px;padding:5px;line-height:15px;border:1px solid #ff6600;background: #fff;font-size:12px;z-index:2; color:#ff6600;}
+        .check-price .tips:before{content:"";position:absolute;left:50%;margin-left:-6px;top:-12px;border:6px solid #ff6b11;border-color:transparent transparent #ff6b11 transparent;}
+        .check-price .tips:after{content:"";position:absolute;left:50%;margin-left:-6px;top:-11px;border:6px solid #fff;border-color:transparent transparent #fff transparent;}
+        input::-ms-clear,
+        input::-ms-reveal{display:none;}
 
-	</style>
+    </style>
 </head>
 <body>
-	<div class="check-price">
-		<span class="unit-price">
-			单价：
-			<i class="currency">￥</i>
-			<i class="price">0.00</i>
-		</span>
-		<span class="check-number" data-min="10" data-max="405" data-step="10" data-price='[{"num":"10+","price":"￥5.882"},{"num":"200+","price":"￥3.85"},{"num":"300+","price":"$3.685"},{"num":"400+","price":"￥2.45"}]'>
-			<i class="minus">-</i>
-			<input class="number" type="text" value="105">
-			<i class="plus">+</i>
-			<span class="tips">不能大于最大库存量！</span>
-		</span>
-		<span class="check-total">
-			合计：
-			<i class="currency">￥</i>
-			<i class="total">0.00</i>
-		</span>
-	</div>
+    <div class="check-price">
+        <span class="unit-price">
+            单价：
+            <i class="currency">￥</i>
+            <i class="price">0.00</i>
+        </span>
+        <span class="check-number" data-min="10" data-max="405" data-step="10" data-price='[{"num":"10+","price":"￥5.882"},{"num":"200+","price":"￥3.85"},{"num":"300+","price":"$3.685"},{"num":"400+","price":"￥2.45"}]'>
+            <i class="minus">-</i>
+            <input class="number" type="text" value="105">
+            <i class="plus">+</i>
+            <span class="tips">不能大于最大库存量！</span>
+        </span>
+        <span class="check-total">
+            合计：
+            <i class="currency">￥</i>
+            <i class="total">0.00</i>
+        </span>
+    </div>
 
-	<script>
-		//自定义数字输入框
-		$.fn.number = function (callback) {
-		    return this.each(function () {
-		        var $ele = $(this),
-	                $number = $ele.find(".number"),
-	                $minus = $ele.find(".minus"),
-	                $plus = $ele.find(".plus"),
-	                $tip = $ele.find('.tips'),
-	                $total = $ele.find('.total'),
-	                
-	                priceArr = $.parseJSON($ele.attr('data-price')),
-	                min = $ele.attr("data-min") - 0 || 1,
-	                max = $ele.attr("data-max") - 0,
-	                step = $ele.attr("data-step") - 0 || 1;
-
+    <script>
+        //自定义数字输入框
+        $.fn.number = function (callback) {
+            return this.each(function () {
+                var $ele = $(this),
+                    $number = $ele.find(".number"),
+                    $minus = $ele.find(".minus"),
+                    $plus = $ele.find(".plus"),
+                    $tip = $ele.find('.tips'),
+                    $total = $ele.find('.total'),
+                    
+                    priceArr = $.parseJSON($ele.attr('data-price')),
+                    min = $ele.attr("data-min") - 0 || 1,
+                    max = $ele.attr("data-max") - 0,
+                    step = $ele.attr("data-step") - 0 || 1;
                 $number.on('change',function(){
-                	var $me = $(this);
-                	var val = $me.val();
-					var isNum = /^\d$/g.test(val);
-					if(!isNum){
-						$me.val(val.replace(/[^\d]/g,''));
-						if($me.val() === ''){
-							$me.val(min);
-							showTips('请输入有效数量值！');
-							//return false;
-						}
-					}
-					
-					val = $me.val() - 0;
-                	if(min){
-                		if(val < min){
-                			$minus.addClass('disabled');
-                			$me.val(min);
-                			showTips('不能小于起订量！');
-                		}else if(val == min){
-                			$minus.addClass('disabled');
-                		}else{
-                			$minus.removeClass('disabled');
-                		}
-                	}
-                	if(max){
-                		if(val > max){
-                			$plus.addClass('disabled');
-                			$me.val(max);
-                			showTips('不能大于库存量！');
-                		}else if(val == max){
-                			$plus.addClass('disabled');
-                		}else{
-                			$plus.removeClass('disabled');
-                		}
-                	}
-                	//依据上面规则排除不符合的条件的val值
-                	val = $me.val() - 0; 
+                    var $me = $(this);
+                    var val = $me.val();
+                    var isNum = /^\d$/g.test(val);
+                    if(!isNum){
+                        $me.val(val.replace(/[^\d]/g,''));
+                        if($me.val() === ''){
+                            $me.val(min);
+                            showTips('请输入有效数量值！');
+                        }
+                    }
+                    
+                    val = $me.val() - 0;
+                    if(min){
+                        if(val < min){
+                            $minus.addClass('disabled');
+                            $me.val(min);
+                            showTips('不能小于起订量！');
+                        }else if(val == min){
+                            $minus.addClass('disabled');
+                        }else{
+                            $minus.removeClass('disabled');
+                        }
+                    }
+                    if(max){
+                        if(val > max){
+                            $plus.addClass('disabled');
+                            $me.val(max);
+                            showTips('不能大于库存量！');
+                        }else if(val == max){
+                            $plus.addClass('disabled');
+                        }else{
+                            $plus.removeClass('disabled');
+                        }
+                    }
+                    //依据上面规则排除不符合的条件的val值
+                    val = $me.val() - 0; 
 
-                	var unitPrice = getPrice();
-                	var totalPrice = (unitPrice * val).toFixed(2);
-                	$ele.attr('data-unitPrice',unitPrice).attr('data-totalPrice',totalPrice);
-                	callback && callback(unitPrice,totalPrice);
-                	
+                    if(priceArr){
+                        var unitPrice = getPrice();
+                        var totalPrice = (unitPrice * val).toFixed(2);
+                        $ele.attr('data-unitPrice',unitPrice).attr('data-totalPrice',totalPrice);
+                        //回调参数：当前ele对象,单价,总价
+                        callback && callback($ele,unitPrice,totalPrice);
+                    }else{
+                        //回调参数：当前ele对象
+                        callback && callback($ele);
+                    }
                 });
 
                 $ele.on('click','.minus',function(){
-                	var $me = $(this);
-                	var val = $number.val() - 0;
-                	var disabled = $me.hasClass('disabled');
-                	if(!disabled){
-                		$number.val(val - step);
-                		$number.trigger('change');
-                	}
+                    var $me = $(this);
+                    var val = $number.val() - 0;
+                    var disabled = $me.hasClass('disabled');
+                    if(!disabled){
+                        $number.val(val - step);
+                        $number.trigger('change');
+                    }
                 }).on('click','.plus',function(){
-                	var $me = $(this);
-                	var val = $number.val() - 0;
-                	var disabled = $me.hasClass('disabled');
-                	if(!disabled){
-                		$number.val(val + step);
-                		$number.trigger('change');
-                	}
+                    var $me = $(this);
+                    var val = $number.val() - 0;
+                    var disabled = $me.hasClass('disabled');
+                    if(!disabled){
+                        $number.val(val + step);
+                        $number.trigger('change');
+                    }
                 });
 
                 //区间单价
                 function getPrice(){
-                	var unitPrice = null;
-	                if(priceArr){
-	                	var length = priceArr.length,
-	                		i = length - 1;
-	                	for(;i >= 0;i--){
-	                		var num = parseInt(priceArr[i].num);
-	                		if($number.val() >= num){
-	                			unitPrice = priceArr[i].price.replace(/[\￥\$]/,'');
-	                			break;
-	                		}
-	                	}
-	                }
-	                return unitPrice ? parseFloat(unitPrice) : null ;
+                    var unitPrice = null,
+                        length = priceArr.length,
+                        i = length - 1;
+                    for(;i >= 0;i--){
+                        var num = parseInt(priceArr[i].num);
+                        if($number.val() >= num){
+                            unitPrice = priceArr[i].price.replace(/[\￥\$]/,'');
+                            break;
+                        }
+                    }
+                    return unitPrice ? parseFloat(unitPrice) : null ;
                 }
 
                 //错误提示
                 function showTips(text){
-            		$tip.text(text).show();
-            		clearTimeout(t);
-                	var t = setTimeout(function(){
-                		$tip.hide();
-                	},1500);
+                    $tip.text(text).show();
+                    clearTimeout(t);
+                    var t = setTimeout(function(){
+                        $tip.hide();
+                    },1500);
                 }
-		    });
-		};
-		$(".check-number").number(function(unitPrice,totalPrice){
-			$('.price').text(unitPrice);
-			$('.total').text(totalPrice);
-		});
-		
-	</script>
+            });
+        };
+
+        // 有data-price时调用
+        $(".check-number").number(function(el,unitPrice,totalPrice){
+            $('.price').text(unitPrice);
+            $('.total').text(totalPrice);
+        });
+
+        // 无data-price时调用
+        /*$(".check-number").number(function(el){
+            console.log(el);
+        });*/
+        
+    </script>
 </body>
 </html>
