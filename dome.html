@@ -74,7 +74,7 @@
                     var val = $me.val();
                     var isNum = /^\d$/g.test(val);
                     if(!isNum){
-                        $me.val(val.replace(/[^\d]/g,''));
+                        $me.val(val.replace(/^0|[^\d]/g,''));
                         if($me.val() === ''){
                             $me.val(min);
                             showTips('请输入有效数量值！');
