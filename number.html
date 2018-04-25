@@ -86,7 +86,7 @@
                         if(val < min){
                             $minus.addClass('disabled');
                             $me.val(min);
-                            showTips('不能小于起订量！');
+                            showTips('不能小于起订量'+ min +'！');
                         }else if(val == min){
                             $minus.addClass('disabled');
                         }else{
@@ -97,7 +97,7 @@
                         if(val > max){
                             $plus.addClass('disabled');
                             $me.val(max);
-                            showTips('不能大于库存量！');
+                            showTips('不能大于最大量'+ max +'！');
                         }else if(val == max){
                             $plus.addClass('disabled');
                         }else{
