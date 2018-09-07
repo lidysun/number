@@ -31,7 +31,6 @@
         .check-price .tips:after{content:"";position:absolute;left:50%;margin-left:-6px;top:-11px;border:6px solid #fff;border-color:transparent transparent #fff transparent;}
         input::-ms-clear,
         input::-ms-reveal{display:none;}
-
     </style>
 </head>
 <body>
@@ -54,6 +53,25 @@
         </span>
     </div>
 
+    <div class="check-price">
+        <span class="unit-price">
+            单价2：
+            <i class="currency">￥</i>
+            <i class="price">0.00</i>
+        </span>
+        <span class="check-number" data-min="10" data-max="405" data-step="5" data-price='[{"num":"10+","price":"￥5.882"},{"num":"200+","price":"￥3.85"},{"num":"300+","price":"$3.685"},{"num":"400+","price":"￥2.45"}]'>
+            <i class="minus">-</i>
+            <input class="number" type="text" value="105">
+            <i class="plus">+</i>
+            <span class="tips">不能大于最大库存量！</span>
+        </span>
+        <span class="check-total">
+            合计：
+            <i class="currency">￥</i>
+            <i class="total">0.00</i>
+        </span>
+    </div>
+
     <script>
         //自定义数字输入框
         $.fn.number = function (callback) {
@@ -63,16 +81,14 @@
                     $minus = $ele.find(".minus"),
                     $plus = $ele.find(".plus"),
                     $tip = $ele.find('.tips'),
-                    $total = $ele.find('.total'),
-                    
                     priceArr = $.parseJSON($ele.attr('data-price')),
                     min = $ele.attr("data-min") - 0 || 1,
                     max = $ele.attr("data-max") - 0,
                     step = $ele.attr("data-step") - 0 || 1;
                 $number.on('change',function(){
-                    var $me = $(this);
-                    var val = $me.val();
-                    var isNum = /^\d$/g.test(val);
+                    var $me = $(this),
+                        val = $me.val(),
+                        isNum = /^\d$/g.test(val);
                     if(!isNum){
                         $me.val(val.replace(/^0|[^\d]/g,''));
                         if($me.val() === ''){
@@ -80,7 +96,6 @@
                             showTips('请输入有效数量值！');
                         }
                     }
-                    
                     val = $me.val() - 0;
                     if(min){
                         if(val < min){
@@ -106,7 +121,6 @@
                     }
                     //依据上面规则排除不符合的条件的val值
                     val = $me.val() - 0; 
-
                     if(priceArr){
                         var unitPrice = getPrice();
                         var totalPrice = (unitPrice * val).toFixed(2);
@@ -118,7 +132,6 @@
                         callback && callback($ele);
                     }
                 });
-
                 $ele.on('click','.minus',function(){
                     var $me = $(this);
                     var val = $number.val() - 0;
@@ -136,7 +149,6 @@
                         $number.trigger('change');
                     }
                 });
-
                 //区间单价
                 function getPrice(){
                     var unitPrice = null,
@@ -151,7 +163,6 @@
                     }
                     return unitPrice ? parseFloat(unitPrice) : null ;
                 }
-
                 //错误提示
                 function showTips(text){
                     $tip.text(text).show();
@@ -162,16 +173,14 @@
                 }
             });
         };
-
         // 有data-price时调用
-        $(".check-number").number(function(el,unitPrice,totalPrice){
-            $('.price').text(unitPrice);
-            $('.total').text(totalPrice);
+        $(".check-number").number(function($el,unitPrice,totalPrice){
+            $el.siblings().find('.price').text(unitPrice);
+            $el.siblings().find('.total').text(totalPrice);
         });
-
         // 无data-price时调用
-        /*$(".check-number").number(function(el){
-            console.log(el);
+        /*$(".check-number").number(function($el){
+            console.log($el);
         });*/
         
     </script>
